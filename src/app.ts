@@ -8,7 +8,12 @@ const app: Express = express();
 // setup swagger for api documentation
 setupSwagger(app);
 
-// set up swagger 
+// Define a route
+app.get("/", (req, res) => {
+	res.send("Simple Express app");
+});
+
+// The route
 /**
  * @openapi
  * /tasks:
@@ -21,11 +26,6 @@ setupSwagger(app);
  */
 app.get("/tasks", (req, res) => {
 	res.send("Retrieve tasks");
-});
-
-// Define a route
-app.get("/", (req, res) => {
-	res.send("Simple Express app");
 });
 
 export default app;
