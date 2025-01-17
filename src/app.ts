@@ -13,7 +13,7 @@ app.get("/", (req, res) => {
 	res.send("Simple Express app");
 });
 
-// The route
+// The route endpoint
 /**
  * @openapi
  * /tasks:
@@ -22,10 +22,20 @@ app.get("/", (req, res) => {
  *     tags: [Tasks]
  *     responses:
  *       200:
- *         description: A list of tasks
+ *         description: A list of tasks for the simple express app
  */
 app.get("/tasks", (req, res) => {
-	res.send("Retrieve tasks");
+	res.send("Simple express app task route");
+});
+
+// create a health check route
+app.get("/api/v1/health", (req, res) => {
+	res.json({
+		status: "OK",
+		uptime: process.uptime(),
+		timestamp: new Date().toISOString(),
+		version: "1.0.0",
+	});
 });
 
 export default app;
