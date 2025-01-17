@@ -1,4 +1,4 @@
-// create an interface for typescript
+// create an interface for typescript structure
 interface PortfolioPerformance {
     initialInvestment : number;
     currentValue: number;
@@ -71,9 +71,18 @@ export function calculatePortfolioPerformance(initialInvestment: number, current
     ];
 
     // need to choose the actual performance summary 
-    
-
-
+    // Start the summary with an empty string
+    let performanceSummary = "";
+    // Iterate through all outcomes in the performance summary outcomes
+    for (const outcomes of performanceSummaryOutcomes) {
+        // check the value (of the outcomes condition) if it is true for the specific percentage
+        if (outcomes.condition(percentageChange)) {
+            // if the value is true, the performance summary is changed to the outcome string
+            performanceSummary = outcomes.outcome;
+            // and can break the iteration
+            break;
+        };
+    };
 
 	return {
 		initialInvestment,
@@ -82,4 +91,4 @@ export function calculatePortfolioPerformance(initialInvestment: number, current
 		percentageChange,
 		performanceSummary,
 	};
-}
+};
