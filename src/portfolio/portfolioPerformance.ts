@@ -92,3 +92,28 @@ export function calculatePortfolioPerformance(initialInvestment: number, current
 		performanceSummary,
 	};
 };
+
+// Define an interface that represents an asset with properties name and value
+interface Asset {
+    name: string;
+    value: number;
+}
+
+// Function to identify the largest holding in a portfolio
+// assets into an array of Asset interface
+export function identifyLargestHolding(assets: Asset[]): Asset {
+    // put the first asset as the largest
+    let largestHolding = assets[0]
+
+    // Iterate through the assets to find the largest asset after the first
+    for (let i = 1; i < assets.length; i++) {
+        // if the current asset in the loop is > the largest found,
+        if (assets[i].value > largestHolding.value) {
+            // make it the new largest holding
+            largestHolding = assets[i];
+        }
+    }
+
+    // return the largest holding
+    return largestHolding;
+}
