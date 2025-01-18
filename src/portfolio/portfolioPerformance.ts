@@ -100,7 +100,7 @@ interface Asset {
 }
 
 // Function to identify the largest holding in a portfolio
-// assets into an array of Asset interface
+// returns a single asset into the array of Assets
 export function identifyLargestHolding(assets: Asset[]): Asset {
     // put the first asset as the largest
     let largestHolding = assets[0]
@@ -111,9 +111,28 @@ export function identifyLargestHolding(assets: Asset[]): Asset {
         if (assets[i].value > largestHolding.value) {
             // make it the new largest holding
             largestHolding = assets[i];
-        }
-    }
+        };
+    };
 
     // return the largest holding
     return largestHolding;
-}
+};
+
+
+// Function to calculate the asset percentages
+// reusing assets interface
+// returns an array of results for calculated percentage
+export function calculateAssetPercentage(assets: Asset[]): { assetName: string; assetPercentage: number }[] {
+
+    // calculate the sum of all the assets
+    const calculatedTotal = assets.reduce((total, asset) => total + asset.value, 0);
+
+    // Iterates through each asset
+    // return the calculated percentage for each, keeping the name the same
+    return assets.map(currentAsset => ({
+        assetName: currentAsset.name,
+        assetPercentage: (currentAsset.value / calculatedTotal) * 100,
+    }));
+
+    
+};
