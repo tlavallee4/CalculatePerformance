@@ -94,7 +94,7 @@ export function calculatePortfolioPerformance(initialInvestment: number, current
 };
 
 // Define an interface that represents an asset with properties name and value
-interface Asset {
+export interface Asset {
     name: string;
     value: number;
 }
@@ -131,8 +131,8 @@ export function calculateAssetPercentage(assets: Asset[]): { assetName: string; 
     // return the calculated percentage for each, keeping the name the same
     return assets.map(currentAsset => ({
         assetName: currentAsset.name,
-        assetPercentage: (currentAsset.value / calculatedTotal) * 100,
+        // change to parseFloat to return back number instead of string
+        // for decimal place to be 2
+        assetPercentage: parseFloat(((currentAsset.value / calculatedTotal) * 100).toFixed(2)),
     }));
-
-    
 };

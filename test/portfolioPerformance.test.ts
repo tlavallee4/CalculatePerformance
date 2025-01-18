@@ -1,5 +1,7 @@
-import request, { Response } from "supertest";
-import { calculatePortfolioPerformance } from "../src/portfolio/portfolioPerformance";
+
+import { calculateAssetPercentage, calculatePortfolioPerformance } from "../src/portfolio/portfolioPerformance";
+import { identifyLargestHolding } from "../src/portfolio/portfolioPerformance";
+import { Asset } from "../src/portfolio/portfolioPerformance";
 
 
 describe("Basic Route Tests", () => {
@@ -107,4 +109,35 @@ describe("Basic Route Tests", () => {
 
         });
     });
+
+    describe("Testing for identifyLargestHolding unit tests", () => {
+        it("should return largest value", () => {
+            // Act
+            const assets = [
+                {name: "house", value: 500000},
+                {name: "stocks", value: 5000},
+            ];
+            const result = identifyLargestHolding(assets)
+            
+            // Assert
+            expect(result).toEqual({name: "house", value: 500000});
+        });
+    });
+
+    it("should return uneven asset percentages accurately", () => {
+        // Act
+        const assets: Asset[] = [
+            { name: "stocks", value: 500 },
+            { name: "bonds", value: 5000 },
+        ];
+
+        const result = calculateAssetPercentage(assets);
+
+        // Assert
+        expect(result).toEqual([
+            { assetName: "stocks", assetPercentage: 9.09 },
+            { assetName: "bonds", assetPercentage: 90.91 },
+        ]);
+    });
 });
+
