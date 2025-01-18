@@ -136,3 +136,6 @@ export function calculateAssetPercentage(assets: Asset[]): { assetName: string; 
         assetPercentage: parseFloat(((currentAsset.value / calculatedTotal) * 100).toFixed(2)),
     }));
 };
+
+// ADDED FOR DEBUGGER testing
+console.log(calculatePortfolioPerformance(10000, 20000));
